@@ -27,14 +27,17 @@ objects:
     metadata:
       name: penfold-bot${SUFFIX_NAME}
       labels:
-        version: ${RELEASE_VERSION}
+        app.kubernetes.io/name: penfold-bot
+        app.kubernetes.io/part-of: penfold-bot
+        app.kubernetes.io/version: ${RELEASE_VERSION}
     spec: {}
   - apiVersion: v1
     kind: BuildConfig
     metadata:
       name: penfold-bot${SUFFIX_NAME}
       labels:
-          version: ${RELEASE_VERSION}
+        app.kubernetes.io/name: penfold-bot
+        app.kubernetes.io/part-of: penfold-bot
     spec:
       postCommit: {}
       resources: {}
@@ -60,11 +63,11 @@ objects:
   - apiVersion: v1
     kind: DeploymentConfig
     metadata:
-      name: penfold-bot${SUFFIX_NAME}
+      name: penfold-bot
       labels:
-        app: penfold-bot
-        project: penfold
-        version: ${RELEASE_VERSION}
+        app.kubernetes.io/name: penfold-bot
+        app.kubernetes.io/part-of: penfold-bot
+        app.kubernetes.io/version: ${RELEASE_VERSION}
     spec:
       template:
         spec:
@@ -139,16 +142,14 @@ objects:
           schedulerName: default-scheduler
         metadata:
           labels:
-            app: nodejs-health-check
-            project: nodejs-health-check
-            provider: nodeshift
-            version: ${RELEASE_VERSION}
+            app.kubernetes.io/name: penfold-bot
+            app.kubernetes.io/part-of: penfold-bot
+            app.kubernetes.io/version: ${RELEASE_VERSION}
       replicas: 1
       revisionHistoryLimit: 2
       selector:
-        app: nodejs-health-check
-        project: nodejs-health-check
-        provider: nodeshift
+        app.kubernetes.io/name: penfold-bot
+        app.kubernetes.io/part-of: penfold-bot
       triggers:
         - type: ConfigChange
         - type: ImageChange
