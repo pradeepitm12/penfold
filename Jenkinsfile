@@ -15,7 +15,7 @@ osio {
           params: [ release_version: "1.0.${env.BUILD_NUMBER}" ]
         )
         build resources: app
-        def service = loadResources(file: './.openshiftio/service.yaml')
+        def service = loadResources(file: './.openshiftio/application.yaml')
         deploy resources: service, env: 'stage'
         deploy resources: app, env: 'stage'
     }
